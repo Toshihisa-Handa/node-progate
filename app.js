@@ -14,19 +14,21 @@ const connection =
       host:'localhost',
       user:'root',//mampではroot
       password:'',//mampでは空でOK
-    //   database:'test'//任意のDB名
+      database:'node_test_db'//任意のDB名
    })
 
    //データベース接続とデータベース作成
    connection.connect(function(err) {
     if (err) throw err;
     console.log('Connected');
+    
+    //テーブル作成
+   const sql = 'CREATE TABLE items (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, name VARCHAR(255) NOT NULL)';
+   connection.query(sql,(error,result)=>{
+    if(error) throw error;
+    console.log('table created')
+   });
    
-    //データベース作成
-    connection.query('CREATE DATABASE node_test_db',(error,results)=>{
-        if(error) throw error;
-        console.log('database created')
-    }) 
 
   });
 
