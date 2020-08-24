@@ -44,6 +44,14 @@ app.get('/index',(req, res)=>{
 });
 });
 
+//編集のルーティング
+   app.get('/edit/:id',(req, res)=>{
+    res.render('edit.ejs');
+});
+
+
+
+
 
 
 //POSTのルーティング
