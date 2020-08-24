@@ -8,6 +8,9 @@ const mysql = require('mysql')
 //publicフォルダ内のcssや画像フォルダの読み取りを可能にする
 app.use(express.static('public'));
 
+//formからpostされた内容を取得可能にする（定型文）
+app.use(express.urlencoded({extended: false}));
+
 //DBの接続準備
 const connection =
    mysql.createConnection({
@@ -46,9 +49,12 @@ app.get('/index',(req, res)=>{
 //POSTのルーティング
 //postではデータベースの変更処理をする
 app.post('/create',(req,res)=>{
+  connection.query('INSERT INTO items (name) VALUES (?)',[req.body.itemName],(error,results)=>{
     connection.query('SELECT * FROM items',(error,results)=>{
         res.render('index.ejs',{items:results})
     });
+  })
+
 });
 
 
