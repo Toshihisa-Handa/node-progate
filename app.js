@@ -17,21 +17,6 @@ const connection =
       database:'node_test_db'//任意のDB名
    })
 
-   //データベース接続とデータベース作成
-   connection.connect(function(err) {
-    if (err) throw err;
-    console.log('Connected');
-    
-    //テーブル作成
-   const sql = 'CREATE TABLE items (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, name VARCHAR(255) NOT NULL)';
-   connection.query(sql,(error,result)=>{
-    if(error) throw error;
-    console.log('table created')
-   });
-   
-
-  });
-
 
 
 //ルーティングを定義
@@ -41,8 +26,15 @@ app.get('/',(req, res)=>{
 });
 
 app.get('/index',(req, res)=>{
-    //res.renderで指定ファイルの画面表示させる
+   connection.query('SELECT * FROM items',(error,results)=>{
+       console.log(results);
+       res.render('index.ejs',{items:results})
+         //res.renderで指定ファイルの画面表示させる
     res.render('index.ejs');
+   });
+
+
+  
 });
 
 
