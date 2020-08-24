@@ -48,15 +48,22 @@ app.get('/index',(req, res)=>{
 
 //POSTのルーティング
 //postではデータベースの変更処理をする
+
+//登録のルーティング
 app.post('/create',(req,res)=>{
   connection.query('INSERT INTO items (name) VALUES (?)',[req.body.itemName],(error,results)=>{
    
     //この文にSELECT文を書き、res.render('/index')をするとINSERTがブラウザリロード度に起こる為、redirectを設定する。
     res.redirect('/index');
   })
-
 });
 
+
+//削除のルーティング
+app.post('/delete',(req,res)=>{
+    res.redirect('/index');
+
+});
 
 
 //ポートの読み込み

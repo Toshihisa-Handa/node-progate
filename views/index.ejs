@@ -24,20 +24,21 @@
 
         
         <ul class="table-body">
-            <% items.forEach((item)=>{ %>
-                <li>
-                    <span class="id-column">
-                    <!-- itemのidプロパティの値を表示してください -->
-                    <%=item.id%>
-                    </span>
-                    <span class="name-column">
-                    <!-- itemのnameプロパティの値を表示してください -->
-                     <%=item.name%>
-              
-                 </li>
-              <% }); %>
-            </span>
-          </li>
+          <% items.forEach((item) => { %>
+            <li>
+              <div class="item-data">
+                <span class="id-column"><%= item.id %></span>
+                <span class="name-column"><%= item.name %></span>
+              </div>
+              <div class="item-menu">
+                <!-- formタグを追加してください -->
+              <form action="/delete" method="post">
+                  <input type="submit" value="削除">
+                </form>
+                
+              </div>
+            </li>
+          <% }) %>
         </ul>
       </div>
     </div>
