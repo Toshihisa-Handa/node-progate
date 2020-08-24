@@ -3,7 +3,7 @@ const express = require('express');
 const app = express();
 
 //mysqlの準備
-const mysql = require('mysql';)
+const mysql = require('mysql')
 
 //publicフォルダ内のcssや画像フォルダの読み取りを可能にする
 app.use(express.static('public'));
@@ -34,4 +34,4 @@ app.get('/index',(req, res)=>{
 
 
 //ポートの読み込み
-app.listen(3000);
+app.listen(3001);
