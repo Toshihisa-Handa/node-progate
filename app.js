@@ -50,9 +50,9 @@ app.get('/index',(req, res)=>{
 //postではデータベースの変更処理をする
 app.post('/create',(req,res)=>{
   connection.query('INSERT INTO items (name) VALUES (?)',[req.body.itemName],(error,results)=>{
-    connection.query('SELECT * FROM items',(error,results)=>{
-        res.render('index.ejs',{items:results})
-    });
+   
+    //この文にSELECT文を書き、res.render('/index')をするとINSERTがブラウザリロード度に起こる為、redirectを設定する。
+    res.redirect('/index');
   })
 
 });
