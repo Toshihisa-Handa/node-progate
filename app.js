@@ -33,6 +33,10 @@ app.get('/index',(req, res)=>{
     res.render('index.ejs');
    });
 
+   app.get('/new',(req, res)=>{
+    // res.renderで指定ファイルの画面表示させる
+    res.render('new.ejs');
+});
 
   
 });
