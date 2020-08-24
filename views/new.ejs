@@ -16,8 +16,12 @@
       </div>
       <div class="item-form-wrapper">
         <p class="form-label">買うもの</p>
-        <input type="text">
-        <input type="submit" value="作成する">
+       <form action='/create' method='post'>
+          <input type="text">
+          <input type="submit" value="作成する">
+        <!-- formタグの閉じタグを書いてください -->
+        </form>
+
       </div>
       <a href="/index" class="cancel-button">もどる</a>
     </div>

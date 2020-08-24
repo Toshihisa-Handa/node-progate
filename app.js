@@ -20,6 +20,9 @@ const connection =
 
 
 //ルーティングを定義
+
+//GETのルーティング
+//getでは画面の表示に関するルーティングを定義する
 app.get('/',(req, res)=>{
     // res.renderで指定ファイルの画面表示させる
     res.render('top.ejs');
@@ -30,16 +33,24 @@ app.get('/index',(req, res)=>{
        console.log(results);
        res.render('index.ejs',{items:results})
          //res.renderで指定ファイルの画面表示させる
-    res.render('index.ejs');
    });
 
    app.get('/new',(req, res)=>{
     // res.renderで指定ファイルの画面表示させる
     res.render('new.ejs');
 });
-
-  
 });
+
+
+
+//POSTのルーティング
+//postではデータベースの変更処理をする
+app.post('/create',(req,res)=>{
+    connection.query('SELECT * FROM items',(error,results)=>{
+        res.render('index.ejs',{items:results})
+    });
+});
+
 
 
 //ポートの読み込み
