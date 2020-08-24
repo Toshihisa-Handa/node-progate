@@ -21,6 +21,13 @@ const connection =
    connection.connect(function(err) {
     if (err) throw err;
     console.log('Connected');
+   
+    //データベース作成
+    connection.query('CREATE DATABASE node_test_db',(error,results)=>{
+        if(error) throw error;
+        console.log('database created')
+    }) 
+
   });
 
 
