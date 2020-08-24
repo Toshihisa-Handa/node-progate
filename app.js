@@ -60,8 +60,11 @@ app.post('/create',(req,res)=>{
 
 
 //削除のルーティング
-app.post('/delete',(req,res)=>{
+app.post('/delete/:id',(req,res)=>{
+  connection.query('DELETE FROM items WHERE id = ?',[req.params.id],(error,results)=>{
     res.redirect('/index');
+
+  });
 
 });
 
