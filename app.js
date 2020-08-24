@@ -8,22 +8,26 @@ const mysql = require('mysql')
 //publicフォルダ内のcssや画像フォルダの読み取りを可能にする
 app.use(express.static('public'));
 
-//DBの接続
+//DBの接続準備
 const connection =
    mysql.createConnection({
       host:'localhost',
       user:'root',//mampではroot
       password:'',//mampでは空でOK
-      database:'test'//任意のDB名
+    //   database:'test'//任意のDB名
    })
 
-
+   //データベース接続とデータベース作成
+   connection.connect(function(err) {
+    if (err) throw err;
+    console.log('Connected');
+  });
 
 
 
 //ルーティングを定義
 app.get('/',(req, res)=>{
-    //res.renderで指定ファイルの画面表示させる
+    // res.renderで指定ファイルの画面表示させる
     res.render('top.ejs');
 });
 
