@@ -111,13 +111,23 @@ app.post('/fileup',(req,res)=>{
       const filename =file.name;
       console.log(filename);
 
-      file.mv('./uploads/'+filename,(error)=>{
+      connection.query('INSERT INTO images (images) VALUES(?)',[filename],(error,results)=>{
+       if(error){
+         res.send(error)
+       }else{
+
+        file.mv('./uploads/'+filename,(error)=>{
           if(error){
               res.send(error)
           }else{
               res.send("File Uploaded")
           }
-      })
+      });
+        
+       };
+
+      });
+
 };
 });
 
