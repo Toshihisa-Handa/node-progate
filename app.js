@@ -46,9 +46,11 @@ app.get('/index',(req, res)=>{
 
 //編集のルーティング
    app.get('/edit/:id',(req, res)=>{
-    res.render('edit.ejs');
-});
+     connection.query('SELECT * FROM items WHERE id = ?',[req.params.id],(error,results)=>{
+      res.render('edit.ejs',{item:results[0]});
+     });
 
+});
 
 
 
