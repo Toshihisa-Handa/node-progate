@@ -5,11 +5,19 @@ const app = express();
 //mysqlの準備
 const mysql = require('mysql')
 
+//fileuploadの準備
+const profile = require('./routes/profile')
+
+
+
 //publicフォルダ内のcssや画像フォルダの読み取りを可能にする
 app.use(express.static('public'));
 
 //formからpostされた内容を取得可能にする（定型文）
 app.use(express.urlencoded({extended: false}));
+
+//fileuploadを使用可能にしている（たぶん）
+app.use('/profile',profile);
 
 //DBの接続準備
 const connection =

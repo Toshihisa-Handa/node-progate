@@ -79,3 +79,7 @@ const connection =
     console.log('table created')
    });
 
+
+
+fileupload関係
+参考：https://www.youtube.com/watch?v=ZEaP_PGWiDw
