@@ -12,12 +12,10 @@ const storage = multer.diskStorage({
     }
   });
   
-  const upload = multer({ storage: storage })
+  const upload = multer({ storage: storage }).single('profileImage');
 
-  var multer = require('multer')
-  var upload = multer().single('avatar')
-  
-  app.post('/profile', function (req, res) {
+  //↓router.post('/profile'.)のprofileを削除したのはapp.jsでapp.use('/profile',profile);を指定しているかららしい
+  router.post('/', function (req, res) {
     upload(req, res, function (err) {
       if (err instanceof multer.MulterError) {
         // A Multer error occurred when uploading.
@@ -27,6 +25,6 @@ const storage = multer.diskStorage({
   
       // Everything went fine.
     })
-  })
+  });
 
 module.exports = router;
