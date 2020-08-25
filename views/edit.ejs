@@ -17,8 +17,8 @@
       </div>
       <div class="item-form-wrapper">
         <p class="form-label">買うもの</p>
-        <form>
-            <input type="text" value='<%=item.name%>'>
+        <form action='/update/<%=item.id%>' method="post">
+            <input type="text" name='itemName' value='<%=item.name%>'>
             <input type="submit" value="更新する">
         </form>
       </div>
