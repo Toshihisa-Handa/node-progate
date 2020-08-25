@@ -79,3 +79,12 @@ const connection =
     console.log('table created')
    });
 
+
+fileのuploadには
+```
+npm install --save express-fileupload
+```
+のインストールが必要
+
+参考github
+https://github.com/Toshihisa-Handa/node-fileupload-test1/tree/han
