@@ -87,7 +87,13 @@ app.post('/update/:id',(req,res)=>{
 
 
 
-
+    //テーブル作成
+    const sql = 'CREATE TABLE images (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, images VARCHAR(255))';
+    connection.query(sql,(error,result)=>{
+     if(error) throw error;
+     console.log('table created')
+    });
+    
 
 //ポートの読み込み
 app.listen(3001);
