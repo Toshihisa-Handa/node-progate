@@ -15,9 +15,11 @@ app.use(express.static('public'));
 //formからpostされた内容を取得可能にする（定型文）CRUDで使う部分
 app.use(express.urlencoded({extended: false}));
 
-//fileuploadeの使用を可能にする
+//fileuploadの使用を可能にする
 app.use(upload());
 
+//uploadsフォルダの読み取りを可能にする
+app.use(express.static('uploads'));
 
 //DBの接続準備
 const connection =
@@ -62,13 +64,18 @@ app.get('/index',(req, res)=>{
 
 //画像投稿ページへのルーティング
   app.get('/fileup',(req,res)=>{
-    
-    res.render('fileup.ejs');
+    connection.query('SELECT * FROM images',(error,results)=>{
+      console.log('hoge')
+      console.log(results)
+      res.render('fileup.ejs',{items:results})
+    })
   })
 
 //fileuploadのgetの記述
 app.get('/fileup',(req, res)=>{
-  res.sendFile(__dirname +'/views/top.ejs')
+  connection.query('SELECT * FROM images',(error,results)=>{
+    res.sendFile(__dirname +'/views/top.ejs')
+  })
 });
 
 
@@ -120,7 +127,8 @@ app.post('/fileup',(req,res)=>{
           if(error){
               res.send(error)
           }else{
-              res.send("File Uploaded")
+              // res.send("File Uploaded")
+              res.redirect('/fileup')
           }
       });
         
