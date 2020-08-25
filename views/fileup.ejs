@@ -7,9 +7,11 @@
 </head>
 <body>
     <h1>このページに画像を投稿する</h1>
+    <% items.forEach((item) => { %>
      <div>
-         <img src="kasa.png" alt="">
+         <img src="<%= item.images %>" alt="">
      </div>
+     <% }) %>
     <form action="/fileup" method='post' enctype="multipart/form-data">
         <input type="file" name='file'>
         <input type="submit" value='send file'>

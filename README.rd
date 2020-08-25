@@ -88,3 +88,11 @@ npm install --save express-fileupload
 
 参考github
 https://github.com/Toshihisa-Handa/node-fileupload-test1/tree/han
+
+
+画像のパスの指定の参考サイトは以下
+https://teratail.com/questions/111141
+http://expressjs.com/ja/starter/static-files.html
+
+app.use(express.static('〇〇'));で読み取りのパスを指定可能。
+複数この記述をする場合上に書いたパス順番に探してくれる。
