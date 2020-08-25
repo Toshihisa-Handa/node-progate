@@ -2,14 +2,22 @@
 const express = require('express');
 const app = express();
 
+//fileuploadの準備
+const upload = require('express-fileupload')
+
+
 //mysqlの準備
 const mysql = require('mysql')
 
 //publicフォルダ内のcssや画像フォルダの読み取りを可能にする
 app.use(express.static('public'));
 
-//formからpostされた内容を取得可能にする（定型文）
+//formからpostされた内容を取得可能にする（定型文）CRUDで使う部分
 app.use(express.urlencoded({extended: false}));
+
+//fileuploadeの使用を可能にする
+app.use(upload());
+
 
 //DBの接続準備
 const connection =
@@ -52,7 +60,16 @@ app.get('/index',(req, res)=>{
 
 });
 
+//画像投稿ページへのルーティング
+  app.get('/fileup',(req,res)=>{
+    
+    res.render('fileup.ejs');
+  })
 
+//fileuploadのgetの記述
+app.get('/fileup',(req, res)=>{
+  res.sendFile(__dirname +'/views/top.ejs')
+});
 
 
 
@@ -85,15 +102,24 @@ app.post('/update/:id',(req,res)=>{
   });
 });
 
+//fileuploadのpostを受け取る記述
+app.post('/fileup',(req,res)=>{
+  if(req.files){
+      console.log(req.files)
+      const file = req.files.file;//req.file.〇〇の部分はindex.htmlのinputタグのname属性と同じにする。
+      console.log('hoge');
+      const filename =file.name;
+      console.log(filename);
 
-
-    //テーブル作成
-    const sql = 'CREATE TABLE images (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, images VARCHAR(255))';
-    connection.query(sql,(error,result)=>{
-     if(error) throw error;
-     console.log('table created')
-    });
-    
+      file.mv('./uploads/'+filename,(error)=>{
+          if(error){
+              res.send(error)
+          }else{
+              res.send("File Uploaded")
+          }
+      })
+};
+});
 
 //ポートの読み込み
 app.listen(3001);
