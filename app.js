@@ -43,28 +43,22 @@ app.use(express.static('uploads'));
 var topRouter = require('./routes/top');
 var testRouter = require('./routes/test');
 var indexRouter = require('./routes/index');
+var newRouter = require('./routes/new');
 app.use('/', topRouter);
 app.use('/test', testRouter);
 app.use('/index', indexRouter);
+app.use('/new', newRouter);
 
 
 
 //GETのルーティング
 //getでは画面の表示に関するルーティングを定義する
 
-
-   app.get('/new',(req, res)=>{
-    // res.renderで指定ファイルの画面表示させる
-    res.render('new.ejs');
-});
-
-
-//編集画面へのルーティング
+//編集画面へのルーティング(外部化失敗)
    app.get('/edit/:id',(req, res)=>{
      connection.query('SELECT * FROM items WHERE id = ?',[req.params.id],(error,results)=>{
       res.render('edit.ejs',{item:results[0]});
      });
-
 });
 
 //画像投稿ページへのルーティング
