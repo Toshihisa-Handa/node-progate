@@ -40,12 +40,16 @@ app.use(express.static('uploads'));
 /////////////////////////////
 //////////ルーティング定義//////////////////////////////////
 
+var topRouter = require('./routes/top');
+app.use('/', topRouter);
+
+
+
 //GETのルーティング
 //getでは画面の表示に関するルーティングを定義する
-app.get('/',(req, res)=>{
-    // res.renderで指定ファイルの画面表示させる
-    res.render('top.ejs');
-});
+
+
+
 
 app.get('/index',(req, res)=>{
    connection.query('SELECT * FROM items',(error,results)=>{
