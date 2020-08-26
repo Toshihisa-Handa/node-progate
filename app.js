@@ -41,14 +41,18 @@ app.use(express.static('uploads'));
 //////////ルーティング定義//////////////////////////////////
 
 var topRouter = require('./routes/top');
+var testRouter = require('./routes/test');
 app.use('/', topRouter);
+app.use('/test', testRouter);
 
 
 
 //GETのルーティング
 //getでは画面の表示に関するルーティングを定義する
-
-
+app.get('/test',(req, res)=>{
+  // res.renderで指定ファイルの画面表示させる
+  res.render('test.ejs');
+});
 
 
 app.get('/index',(req, res)=>{
@@ -57,12 +61,12 @@ app.get('/index',(req, res)=>{
        res.render('index.ejs',{items:results})
          //res.renderで指定ファイルの画面表示させる
    });
-
+  });
    app.get('/new',(req, res)=>{
     // res.renderで指定ファイルの画面表示させる
     res.render('new.ejs');
 });
-});
+
 
 //編集画面へのルーティング
    app.get('/edit/:id',(req, res)=>{
