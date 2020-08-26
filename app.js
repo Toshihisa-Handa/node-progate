@@ -121,7 +121,8 @@ app.post('/fileup',(req,res)=>{
       console.log(req.files)
       const file = req.files.file;//req.file.〇〇の部分はindex.htmlのinputタグのname属性と同じにする。
       console.log('hoge');
-      const filename =file.name;
+      //ここ(filename)でpostしたファイルの名前を指定している。
+      const filename =Date.now() + '-' + Math.round(Math.random() * 1E9)+file.name;
       console.log(filename);
 
       connection.query('INSERT INTO images (images) VALUES(?)',[filename],(error,results)=>{
@@ -129,6 +130,7 @@ app.post('/fileup',(req,res)=>{
          res.send(error)
        }else{
 
+        //ここの記述でuploadsフォルダにpostした画像を格納している。
         file.mv('./uploads/'+filename,(error)=>{
           if(error){
               res.send(error)
