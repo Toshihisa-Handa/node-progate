@@ -1,3 +1,6 @@
+/////////////////////////////
+//////////定数定義//////////////////////////////////
+
 //expressの準備
 const express = require('express');
 const app = express();
@@ -8,6 +11,18 @@ const upload = require('express-fileupload')
 
 //mysqlの準備
 const mysql = require('mysql')
+
+//DBの接続準備
+const connection =
+   mysql.createConnection({
+      host:'localhost',
+      user:'root',//mampではroot
+      password:'',//mampでは空でOK
+      database:'node_test_db'//任意のDB名
+   });
+
+/////////////////////////////
+//////////useの定義//////////////////////////////////
 
 //publicフォルダ内のcssや画像フォルダの読み取りを可能にする
 app.use(express.static('public'));
@@ -21,18 +36,9 @@ app.use(upload());
 //uploadsフォルダの読み取りを可能にする
 app.use(express.static('uploads'));
 
-//DBの接続準備
-const connection =
-   mysql.createConnection({
-      host:'localhost',
-      user:'root',//mampではroot
-      password:'',//mampでは空でOK
-      database:'node_test_db'//任意のDB名
-   })
 
-
-
-//ルーティングを定義
+/////////////////////////////
+//////////ルーティング定義//////////////////////////////////
 
 //GETのルーティング
 //getでは画面の表示に関するルーティングを定義する
@@ -139,5 +145,13 @@ app.post('/fileup',(req,res)=>{
 };
 });
 
-//ポートの読み込み
+
+
+
+
+
+
+/////////////////////////////
+////////////ポートの読み込み//////////////////////////////////
+
 app.listen(3001);
