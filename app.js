@@ -44,10 +44,12 @@ var topRouter = require('./routes/top');
 var testRouter = require('./routes/test');
 var indexRouter = require('./routes/index');
 var newRouter = require('./routes/new');
+var fileupRouter = require('./routes/fileup');
 app.use('/', topRouter);
 app.use('/test', testRouter);
 app.use('/index', indexRouter);
 app.use('/new', newRouter);
+app.use('/fileup', fileupRouter);
 
 
 
@@ -61,21 +63,7 @@ app.use('/new', newRouter);
      });
 });
 
-//画像投稿ページへのルーティング
-  app.get('/fileup',(req,res)=>{
-    connection.query('SELECT * FROM images',(error,results)=>{
-      console.log('hoge')
-      console.log(results)
-      res.render('fileup.ejs',{items:results})
-    })
-  })
 
-//fileuploadのgetの記述
-app.get('/fileup',(req, res)=>{
-  connection.query('SELECT * FROM images',(error,results)=>{
-    res.sendFile(__dirname +'/views/top.ejs')
-  })
-});
 
 
 
