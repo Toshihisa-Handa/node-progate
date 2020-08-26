@@ -40,6 +40,7 @@ app.use(express.static('uploads'));
 /////////////////////////////
 //////////ルーティング定義//////////////////////////////////
 
+//routesフォルダに以降したルーティング
 var topRouter = require('./routes/top');
 var testRouter = require('./routes/test');
 var indexRouter = require('./routes/index');
@@ -62,7 +63,6 @@ app.use('/fileup', fileupRouter);
       res.render('edit.ejs',{item:results[0]});
      });
 });
-
 
 
 //POSTのルーティング
