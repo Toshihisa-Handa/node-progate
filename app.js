@@ -42,8 +42,10 @@ app.use(express.static('uploads'));
 
 var topRouter = require('./routes/top');
 var testRouter = require('./routes/test');
+var indexRouter = require('./routes/index');
 app.use('/', topRouter);
 app.use('/test', testRouter);
+app.use('/index', indexRouter);
 
 
 
@@ -51,13 +53,6 @@ app.use('/test', testRouter);
 //getでは画面の表示に関するルーティングを定義する
 
 
-app.get('/index',(req, res)=>{
-   connection.query('SELECT * FROM items',(error,results)=>{
-       console.log(results);
-       res.render('index.ejs',{items:results})
-         //res.renderで指定ファイルの画面表示させる
-   });
-  });
    app.get('/new',(req, res)=>{
     // res.renderで指定ファイルの画面表示させる
     res.render('new.ejs');
