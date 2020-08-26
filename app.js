@@ -49,10 +49,6 @@ app.use('/test', testRouter);
 
 //GETのルーティング
 //getでは画面の表示に関するルーティングを定義する
-app.get('/test',(req, res)=>{
-  // res.renderで指定ファイルの画面表示させる
-  res.render('test.ejs');
-});
 
 
 app.get('/index',(req, res)=>{
